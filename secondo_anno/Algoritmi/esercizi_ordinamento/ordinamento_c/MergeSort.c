@@ -3,26 +3,29 @@
 
 #define LEN_ARRAY 11
 
-void MergeSort(int array[], int i, int f){
-    if(i < f){
-      int m = (i + f) / 2;
-      MergeSort(array, i, m);
-      MergeSort(array, m, f );
-      Merge(array, i, m, f)
+void Merge(int array[], int sx, int cx, int dx) {
+    int j = 0, k1 = sx, k2 = cx + 1;
+    int *X = (int *)calloc((dx - sx), sizeof(int));
+    while (k1 <= cx && k2 <= dx) {
+        if (array[k1] < array[k2]) {
+            X[j] = array[k1];
+            j++;
+            k1++;
+        } else {
+            X[j] = array[k2];
+            j++;
+            k2++;
+        }
     }
 }
 
-void Merge(int array[], int sx, int cx, int dx){
-    int j = 0, k_1 = sx, k_2 = cx;
-    int X[];
-    X = calloc((dx - sx + 1), sizeof(int));
-    while(k_1 <= cx && k_2 <= dx - 1){
-
+void MergeSort(int array[], int i, int f) {
+    if (i < f) {
+        int m = (i + f) / 2;
+        MergeSort(array, i, m - 1);
+        MergeSort(array, m, f);
+        Merge(array, i, m, f);
     }
 }
-
-
-int main(){
-
-
+int main() {
 }
