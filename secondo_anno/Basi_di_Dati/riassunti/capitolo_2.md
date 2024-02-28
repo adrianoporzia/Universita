@@ -62,7 +62,7 @@
         t[Cognome] --> 'Pace'
         | Nome  | Cognome  | Matricola | Voto Medio |
         |  ---  |   ---    |    ---    |     ---    | 
-        | Jack  | **Pace** |     1     |     30     |
+        | Jack  |   Pace   |     1     |     30     |
         | Luigi | Amato    |     2     |     18     |
         | Rosa  | Rossa    |     3     |     27     |
 
