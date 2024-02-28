@@ -54,7 +54,7 @@
                 -Una ennetulpa o tupla è una funzione _t_ che associa ad ogni A ∈ X un ** valore del dominio **.
                 - ** t[A] ** denota il valore della ennetupla _t_ sull'attributo _A_ .
 
-- Una ** relazione ** è una collezione di ** ennetuple **.
+- Una **relazione** è una collezione di ** ennetuple **.
 
 
 
