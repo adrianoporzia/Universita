@@ -55,9 +55,10 @@
                 - **t[A]** denota il valore della ennetupla _t_ sull'attributo _A_ .
 
 - Una **relazione** è una collezione di **ennetuple**.
-- ## Notazione del modello relazionale 
+- 
+- ### Notazione del modello relazionale 
 - Se t è una tupla su X e A è un attributo, con A ∈ X allora t [A] indica il valore di t su A.
-- ### Es: se t è una prima tupla allora...
+- #### Es: se t è una prima tupla allora...
             
         t[Cognome] --> 'Pace'
         | Nome  | Cognome  | Matricola | Voto Medio |
@@ -127,3 +128,119 @@
     3) Valore **senza informazione** .
 - ##### OSS :
 - I DBMS non distinguono i tipi di valore nullo.
+
+- ## 2.2 Vincoli d'integrita
+- Esistono istanze di basi di dati che, pur sintatticamente corrette, non rappresentano informazioni possibili per l'applicazione. Come per esempio 
+  due utenti con stessa matricola o se si considera il campo "Voto" e c'è magari 27 e lode.
+- Proprietà che deve essere soddisfatta dalle istanze che rappresentano informazioni corrette per l'applicazione.
+- ##### Un vincolo è una funzione booleana(un **predicato** basato sulla logica del primo ordine) che associa ad ogni istanza il valore VERO o FALSO.
+- Consentono una descrizione più accurata della realtà e vengono usati dai DBMS nella esecuzione delle interrogazioni.
+- 
+- ### Tipologie di Vincoli 
+1) Vincoli **intrarelazionali**:
+   - vincoli su valori (o di dominio);
+   - vincoli di enneupla.
+2) Vincoli **interrelazionali** .
+
+- ##### 1.2 Vincoli di enneupla
+- Esprimono condizioni sui valori di ciascuna enneupla, indipendentemente dalle altre enneuple. Caso particolare è quando ci sono **vincoli di dominio** 
+  che coinvolgono solo un attributo. Come per esempio:
+
+        -Espressioni booleane del tipo:
+            (Voto >= 18) AND (Voto <= 30)
+            (Voto = 30) OR NOT (Lode = "e lode")
+- Ma anche in casi in cui ho tabelle del tipo:
+
+            Stipendi --> | Impiegato | Lordo       |  Ritenute   | Netto       |
+                         |    ---    |     ---     |    ---      |     ---     |
+                         | Rossi     | 55.000,00 £ | 12.500,00 £ | 42.500,00 £ | 
+
+            Lordo = (Ritenute + Netto) 
+- ## 2.2 Chiavi
+- Non ci sono due enneuple con lo stesso valore sull'attributo **Matricola** . Non ci sono due enneuple uguali su tutti e tre gli atteibuti **Cognome,  
+  Nome e Voto medio** .
+
+         | Nome  | Cognome  | Matricola | Voto Medio |
+         |  ---  |   ---    |    ---    |     ---    | 
+         | Jack  | Pace     |     1     |     30     |
+         | Luigi | Amato    |     2     |     18     |
+         | Rosa  | Rossa    |     3     |     27     |
+- ### Definizione chiave:
+  - Insieme di attributi che identificano univocamente le enneuple di una relazione. 
+  - 
+- **Formalmente** :
+  - un insieme **K** di attributi è superchiave per "r" se "r" non contiene due enneuple distinte **t1** e **t2** con **t1[K] = t2[K]**
+  - **K** è una **chiave** per "r" se è una superchiave minimale per "r"(ossia, non contiene un'altra superchiave).
+  - Nell'esempio sopra la Matricola è una chiave poichè è una **superchiave** e contiene un solo attributo e quindi è minimale. Ma anche Cognome, Voto 
+    medio e Nome è un'altra chiave, superchiave ed è minimale.
+- ### Vincoli, schemi e istanze 
+- I vincoli corrispondono a proprietà del mondo reale modellato dalla base di dati. Interessano a livello di schema, ovvero a tutte le istanze, e ad 
+  uno schema associamo un insieme di vincoli e consideriamo **corrette** (valide, ammissibili) le istanze che soddisfano tutti i vincoli. **OSS =** 
+  un'istanza può soddisfare altri vincoli ("per caso").
+- #### ES:
+        Studenti 
+        | Matricola | Cognome | Nome | Corso | Nascita |
+        
+        --> Chiavi:
+            1) Matricola;
+            2) Cognome, Nome, Nascita.
+- L'esempio è **corretto** perchè soddisfa i vincoli, ma ne soddisfa anche altri (" **per caso** ");
+  - Cognome, Corso è chiave;
+- Una relazione non può contenere **enneuple distinte** ma **uguali** ; ogni relazione ha come **superchiave** l'insieme degli attributi su cui è definita.
+
+- ## Differenza tra superchiave e chiave in un database:
+- Immagina un database come un grande archivio di informazioni, organizzato in tabelle simili a fogli di calcolo. Ogni riga della tabella, chiamata tupla, 
+ rappresenta un'entità specifica (ad esempio, un cliente, un prodotto o un ordine).
+
+- ### Superchiave:
+  - È un insieme di attributi (colonne) che identifica univocamente ogni tupla nella tabella.
+   - In parole povere, se guardiamo due tuple con la stessa "superchiave", sappiamo che sono la stessa entità.
+   - Pensa alla superchiave come a un'impronta digitale: ogni tupla ha la sua impronta unica.
+
+- ##### Esempio:
+ - Consideriamo una tabella Studenti con i seguenti attributi:
+
+        - ID (numero intero)
+        - Nome (stringa)
+        - Cognome (stringa)
+
+- In questo caso, sia {ID} che {Nome, Cognome} sono superchiavi:
+
+        - Non ci sono due studenti con lo stesso ID.
+        - Non ci sono due studenti con lo stesso nome e cognome.
+
+- ### Chiave:
+- È una superchiave "speciale" che soddisfa due proprietà:
+  1) **Minimalità** : Non è possibile rimuovere alcun attributo dalla chiave senza perdere l'unicità.
+  2) **Non ridondanza** : Non ci sono attributi che dipendono da altri attributi nella chiave.
+
+- In parole povere:
+  1) La chiave è la superchiave più piccola e "semplice" possibile.
+  2) La chiave non contiene informazioni ridondanti.
+
+- ##### Esempio:
+        Nel nostro caso, {ID} è una chiave, mentre {Nome, Cognome} non lo è:
+
+        - {ID} è minimale: se togliamo l'ID, non possiamo più identificare univocamente gli studenti.
+        - {Nome, Cognome} non è minimale: possiamo ricavare il cognome dal nome e viceversa, quindi è ridondante.
+
+- Perché la chiave è importante?
+ 1) La chiave primaria (una chiave specifica) è usata per identificare univocamente ogni tupla nella tabella.
+ 2) La chiave primaria è usata per collegare le tabelle tra loro.
+ 3) La chiave primaria deve essere univoca e non ridondante per garantire l'integrità dei dati.
+
+- Riassumendo:
+  - Una superchiave identifica univocamente le tuple.
+  - Una chiave è una superchiave minimale e non ridondante.
+  - Ogni tabella deve avere almeno una chiave primaria.
+- ##### Analogia:
+
+        Immagina una biblioteca con libri identificati da un numero ISBN (codice a barre) e da un titolo.
+
+        - L'ISBN è una superchiave: ogni libro ha un ISBN univoco.
+        - Il titolo non è una superchiave: potrebbero esserci libri con lo stesso titolo.
+        - L'ISBN e il titolo insieme sono una superchiave: non ci sono due libri con lo stesso ISBN e lo stesso titolo.
+        - L'ISBN è una chiave: è minimale e non ridondante.
+
+
+- ## 2.2.3 Chiavi e valori nulli
