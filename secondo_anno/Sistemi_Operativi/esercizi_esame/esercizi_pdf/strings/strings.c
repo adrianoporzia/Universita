@@ -84,14 +84,13 @@ void str_cat(char *s1, char *s2) {
 }
 
 void str_chr(char *s1, char c) {
-    int *p, n = str_len(s1);
-    for (int i = 0; i < n; i++) {
-        if (s1[i] == c) {
-            *p = s1[i];
-            printf("%d\n", *p);
+    while (*s1 != '\0') {
+        if (*s1 == c) {
             return;
         }
+        s1++;
     }
+    return;
 }
 
 int main() {
