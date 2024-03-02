@@ -6,6 +6,7 @@ int str_cmp_n(char *, char *, int);
 int str_cpy(char *, char *);
 int str_len(char *);
 void str_cat(char *, char *);
+void str_chr(char *, char);
 
 int str_cmp(char *s1, char *s2) {
     if (s1 > s2) {
@@ -69,21 +70,34 @@ int str_len(char *s1) {
 
 void str_cat(char *s1, char *s2) {
     char *cat = malloc((str_len(s1) + str_len(s2)) * sizeof(char));
-    int i = 0;
+    int i = 0, j = 0;
     while (s1[i] != '\0') {
         cat[i] = s1[i];
         i++;
     }
-    while (s2[i] != '\0') {
-        cat[i] = s2[i];
+    while (s2[j] != '\0') {
+        cat[i] = s2[j];
         i++;
+        j++;
     }
     printf("%s\n", cat);
 }
+
+void str_chr(char *s1, char c) {
+    int *p, n = str_len(s1);
+    for (int i = 0; i < n; i++) {
+        if (s1[i] == c) {
+            *p = s1[i];
+            printf("%d\n", *p);
+            return;
+        }
+    }
+}
+
 int main() {
-    char *s1 = "Cia";
+    char *s1 = "Ciaomondo";
     char *s2 = "mondo";
     char *s3 = "Ci  ao";
-    str_cat(s1, s2);
+    str_chr(s1, 'o');
     // int y = str_cmp_n(s1, s2, 4);
 }
