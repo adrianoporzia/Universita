@@ -80,3 +80,50 @@
 
 - I riferimenti fra i dati in relazioni diverse sono rappresentati per mezzo di valori dei domini che compaiono nelle enneuple. Sostanzialmente tra 
   tabelle ci sono riferimenti ad altre tabelle in base ad attributi specifici.
+
+- ## Vantaggi della struttura basata sui valori 
+1) indipendenza dalle strutture fisiche(_si potrebbero avere anche con puntatori di alto livello_) che possono cambiare dinamiche;
+2) si rappresenta solo ciò che è rilevante dal punto di vista dell'applicazione;
+3) l'utente finale vede gli stessi dati dei programmatori;
+4) i dati sono portabili più facilmente da un sistema all'altro;
+5) i puntatori sono direzionali.
+
+- ## Modello relazionale: Definizioni
+- #### Schema di relazione: 
+        Un nome ** R ** con un insieme di attributi ** A1, ..., An:
+                 --> ** R(A1, ..., An)
+
+        ES :
+               STUDENTI(Matricola, Cognome, Nome, Data di Nascita) 
+
+- #### Schema di base di dati: 
+        insieme di schemi di relazione:
+                --> ** R = {R1(X1), ..., Rk(Xk)}
+
+        Es:
+                STUDENTI(Matricola, Cognome, Nome, Data di nascita)
+                ESAMI(Matricola, Voto, Corso)
+                CORSO(Codice, Titolo, Docente)
+
+- ## Strutture nidificate
+- E' fondamentale non avere all'interno di strutture di dati due righe che siano uguali, come per esempio nelle ricevute(scontrini) non ci devono
+  essere uguali.
+
+- ## Informazioni incomplete
+- #### Se ci dovessero essere tabelle che hanno voci mancanti Sostanzialmente.
+- ** Non conviene ** (anche se spesso si fa) usare valori del dominio, come:
+    - ##### 0, stringa, nulla, "99", ...;
+    - potrebbero non esistere valori ** "non utilizzati" ** ;
+    - valori ** "non utilizzati" ** potrebbero diventare significativi;
+    - in fase di utilizzo (nei programmi) sarebbe necessario ogni volta tener conto del "significato" di questi valori.
+- ### Valore nullo nel modello relazionale 
+- Per le informazioni incomplete si adotta una tecnica rudimentale ma efficacie:
+    - ** Valore nullo ** : denota l'assenza di un valore del dominio;
+    - t[A], per ogni attributo A, è un valore ndel dominio ** dom(A) ** oppure il valore è ** NULL **;
+    - si possono imporre restrizioni sulla presenza di valori nulli.
+- #### Casi valore nullo:
+    1) Valore ** sconosciuto ** .
+    2) Valore ** inesistente ** .
+    3) Valore ** senza informazione ** .
+- ##### OSS :
+- I DBMS non distinguono i tipi di valore nullo.
