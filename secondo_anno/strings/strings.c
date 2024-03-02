@@ -64,7 +64,7 @@ int str_len(char *s1) {
         i++;
     }
     printf("La lunghezza della stringa [%s] è %d\n", s1, len);
-    return 0;
+    return len;
 }
 
 void str_cat(char *s1, char *s2) {
