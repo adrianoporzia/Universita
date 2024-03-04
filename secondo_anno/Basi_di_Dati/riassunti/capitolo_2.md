@@ -244,3 +244,17 @@
 
 
 - ## 2.2.3 Chiavi e valori nulli
+- In presenza di **valori nulli** , i valori della chiave non permettono:
+   1) di identificare le enneuple; 
+   2) di realizzare facilmente i riferimenti da altre relazioni;
+   3) la presenza di valori nulli nelle chiavi deve essere limitata.
+
+- La **chiave primaria** è una chiave su cui non sono **ammessi nulli** .
+- ## Integrità referenziale.
+- Informazioni in relazioni diverse sono correllate attraverso valori comuni, correlazioni coerenti.
+- Un vincolo di integrità referenziale **(“foreign key”)** fra gli attributi X di una relazione R1 e un’altra relazione R2 impone ai valori su X in
+  R1 di comparire come valori della chiave primaria di R. Gestiscono situazioni scomode, come se **per esempio** :
+  - viene eliminata una enneupla causando così una violazione. Azioni = 
+     1) Rifiuto dell'operazione.
+     2) Eliminazione in cascata.
+     3) Introduzione di valori nulli.
