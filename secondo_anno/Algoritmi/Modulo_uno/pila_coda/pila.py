@@ -16,22 +16,16 @@ class Pila:
         self.items.append(item)
 
     def pop(self):
-        if not self.is_empty:
+        if not self.is_empty():
             return self.items.pop() 
         else:
             print("Pila vuota. Impossibile pop")
+            return 0
 
     def top(self):
-        if not self.is_empty:
+        if not self.is_empty():
             return self.items[-1]
+        else:
+            print("Pila vuota. Impossibile top")
 
 
-pila = Pila()
-i = 0
-while i < 10:
-    pila.push(i)
-    i += 1
-print(pila.items)
-
-pila.pop()
-print(pila.items)
