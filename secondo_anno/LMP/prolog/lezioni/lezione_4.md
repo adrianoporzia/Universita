@@ -28,7 +28,7 @@
 - ## Predicati sulle liste 
 -  **"predicato appartiene"** per verificare se un elemento appartiene a un insieme tipo una lista, se non ci sta torna falso.
 
-        a ∈ A 
+- $a\in A$
 - #### Usiamo induzione strutturale 
         
         L = [H | T] 
@@ -61,7 +61,7 @@
 - Ciò che mi da è prima 1, poi se fai **next** ti da 2 e infine 3.
 - ##### Es 5.2:
 
-        H1, H2 | T] = [a, b, c]
+        [H1, H2 | T] = [a, b, c]
 - Dove:
     1) **H1 = a**
     2) **H2 = b**
