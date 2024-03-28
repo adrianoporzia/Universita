@@ -1,0 +1,51 @@
+/* Soluzione realizzata e fornita da Daniil Mastrangeli ;-) */
+vocale('a').
+vocale('e').
+vocale('i').
+vocale('o').
+vocale('u').
+
+lunghezza([], 0).
+lunghezza([_|T], N) :-
+    lunghezza(T, N1), N is N1 + 1.
+
+conta_vocali([], 0).
+conta_vocali([H|T], Count) :-
+    vocale(H), 
+    conta_vocali(T, Count1), 
+    Count is Count1 + 1.
+conta_vocali([_|T], Count) :-
+    conta_vocali(T, Count).
+
+calcolo_media_vocali(Segno, MediaV) :-
+    string_chars(Segno, ListaCaratteri),
+    conta_vocali(ListaCaratteri, NumVocali),
+    lunghezza(ListaCaratteri, Lunghezza),
+    MediaV is NumVocali / Lunghezza.
+
+
+conta_consonanti([], 0).
+conta_consonanti([H|T], Count) :-
+    \+ vocale(H), conta_consonanti(T, Count1), Count is Count1 + 1.
+conta_consonanti([_|T], Count) :-
+    conta_consonanti(T, Count).
+
+calcolo_media_consonanti(Segno, MediaC) :-
+    string_chars(Segno, ListaCaratteri),
+    conta_consonanti(ListaCaratteri, NumConsonanti),
+    lunghezza(ListaCaratteri, Lunghezza),
+    MediaC is NumConsonanti / Lunghezza.
+
+
+calcola_giornata(MediaC, MediaV, Giornata) :-
+    MediaC == MediaV,
+    Giornata = 'Giornata Fortunata'.
+calcola_giornata(MediaC, MediaV, Giornata) :-
+    MediaC \= MediaV,
+    Giornata = 'Giornata Sfortunata'.
+
+
+tipo_giornata(Segno, Giornata):-
+    calcolo_media_vocali(Segno, MediaV),
+    calcolo_media_consonanti(Segno, MediaC),
+    calcola_giornata(MediaC, MediaV, Giornata), !.
