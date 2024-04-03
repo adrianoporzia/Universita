@@ -15,6 +15,8 @@ public class Main {
         ArrayList<Integer> arrayBlue = new ArrayList<Integer>();    //costi blu
 
         ArrayList<Casa> caseList = new ArrayList<Casa>();           //tutte le case
+        ArrayList<Integer> OPT = new ArrayList<Integer>();           //tutte le case
+
 
         caseList.add(casa1);                                        //aggiungo le case in  un array
         caseList.add(casa2);                                        // cosi con un for each prendo i singoli
@@ -33,15 +35,18 @@ public class Main {
 
         int min = Math.min(Math.min(arrayRed.get(0), arrayGreen.get(0)), arrayBlue.get(0));
 
+        OPT.add(min);
+
         int len = arrayRed.size();
         for(int i = 1; i < len; i++){
             arrayRed.set(i, arrayRed.get(i) + Math.min(arrayGreen.get(i - 1), arrayBlue.get(i - 1)));
             arrayGreen.set(i, arrayGreen.get(i) + Math.min(arrayRed.get(i - 1), arrayBlue.get(i - 1)));
             arrayBlue.set(i, arrayBlue.get(i) + Math.min(arrayGreen.get(i - 1), arrayRed.get(i - 1)));
+            OPT.add(Math.min(Math.min(arrayRed.get(i), arrayGreen.get(i)), arrayBlue.get(i)));
 
         }
         System.out.println(Math.min(Math.min(arrayRed.get(len - 1), arrayGreen.get(len - 1)), arrayBlue.get(len - 1)));
-
+        System.out.println(OPT);
 
     }
 }
