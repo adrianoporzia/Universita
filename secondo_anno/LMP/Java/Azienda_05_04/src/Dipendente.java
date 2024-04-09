@@ -1,34 +1,44 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Dipendente {
+    /*parametri di ogni singolo dipendente*/
     private String nome;
     private String cognome;
     private Date dataDiNascita;
     private Date dataDiAssunzione;
-    private static int nMatricola;
+    /*parametri che vengono generati alla creazione*/
     private String matricola;
     private String dipartimento;
     private String mansione;
     private int livello;
-    private int capo;
+    private String capo;
 
-    public Dipendente(String nome, String cognome, String dataDiNascita, String dataDiAssunzione) {
+    /*static numero dipendenti*/
+    private static int numeroDipendenti = 0;
+
+    public Dipendente(String nome, String cognome, Date dataDiNascita, Date dataDiAssunzione, String matricola, String dipartimento, String mansione, int livello, String capo) {
         this.nome = nome;
         this.cognome = cognome;
-        this.dataDiNascita = parseStringToDate(dataDiNascita);
-        this.dataDiAssunzione = parseStringToDate(dataDiAssunzione);
+        this.dataDiNascita = dataDiNascita;
+        this.dataDiAssunzione = dataDiAssunzione;
+        this.matricola = matricola;
+        this.dipartimento = dipartimento;
+        this.mansione = mansione;
+        this.livello = livello;
+        this.capo = capo;
     }
 
-    private Date parseStringToDate(String dateString) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            return sdf.parse(dateString);
-        } catch (ParseException e) {
-            System.out.println("Errore nel parse");
-            return null;
-        }
+    enum Dipartimento{
+        marketing,
+        risorseUmane,
+        sviluppo
+    }
+
+    enum Mansione{
+        fabbro,
+        elettrcista,
+        tecnico,
+        falegname
     }
 
     public String getNome() {
@@ -63,5 +73,54 @@ public class Dipendente {
         this.dataDiAssunzione = dataDiAssunzione;
     }
 
-    public void createDipendente(String nome, String cognome, )
+    public String getMatricola() {
+        return matricola;
+    }
+
+    public void setMatricola(String matricola) {
+        this.matricola = matricola;
+    }
+
+    public String getDipartimento() {
+        return dipartimento;
+    }
+
+    public void setDipartimento(String dipartimento) {
+        this.dipartimento = dipartimento;
+    }
+
+    public String getMansione() {
+        return mansione;
+    }
+
+    public void setMansione(String mansione) {
+        this.mansione = mansione;
+    }
+
+    public int getLivello() {
+        return livello;
+    }
+
+    public void setLivello(int livello) {
+        this.livello = livello;
+    }
+
+    public String getCapo() {
+        return capo;
+    }
+
+    public void setCapo(String capo) {
+        this.capo = capo;
+    }
+
+    public static int getNumeroDipendenti() {
+        return numeroDipendenti;
+    }
+
+    public static void setNumeroDipendenti(int numeroDipendenti) {
+        Dipendente.numeroDipendenti = numeroDipendenti;
+    }
+
+    public void
+
 }

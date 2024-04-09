@@ -16,9 +16,9 @@ def cioccolata(G, n):
 
         OPT[i] = max
 
-    print(OPT)
-    print(S)
-    return OPT[-1]
+    #print(OPT)
+    #print(S)
+    return OPT[-1], S[-1]
 
 def costruzione_sol(S, n):
     for i in range(n):
