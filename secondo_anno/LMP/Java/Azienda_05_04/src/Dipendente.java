@@ -8,7 +8,7 @@ public class Dipendente {
     private Date dataDiAssunzione;
     /*parametri che vengono generati alla creazione*/
     private String matricola;
-    private String dipartimento;
+    private Dipartimento dipartimento;
     private String mansione;
     private int livello;
     private String capo;
@@ -16,23 +16,18 @@ public class Dipendente {
     /*static numero dipendenti*/
     private static int numeroDipendenti = 0;
 
-    public Dipendente(String nome, String cognome, Date dataDiNascita, Date dataDiAssunzione, String matricola, String dipartimento, String mansione, int livello, String capo) {
+    public Dipendente(String nome, String cognome, Date dataDiNascita, Date dataDiAssunzione, String matricola, Dipartimento dipartimento, String mansione, int livello, String capo) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataDiNascita = dataDiNascita;
         this.dataDiAssunzione = dataDiAssunzione;
-        this.matricola = matricola;
+        this.matricola = getMatricola();
         this.dipartimento = dipartimento;
         this.mansione = mansione;
         this.livello = livello;
         this.capo = capo;
     }
 
-    enum Dipartimento{
-        marketing,
-        risorseUmane,
-        sviluppo
-    }
 
     enum Mansione{
         fabbro,
@@ -74,18 +69,20 @@ public class Dipendente {
     }
 
     public String getMatricola() {
-        return matricola;
+        String output = "CLT<" + numeroDipendenti + ">";
+        numeroDipendenti++;
+        return output;
     }
 
     public void setMatricola(String matricola) {
         this.matricola = matricola;
     }
 
-    public String getDipartimento() {
-        return dipartimento;
+    public Dipartimento getDipartimento() {
+        return this.dipartimento;
     }
 
-    public void setDipartimento(String dipartimento) {
+    public void setDipartimento(Dipartimento dipartimento) {
         this.dipartimento = dipartimento;
     }
 
@@ -120,7 +117,4 @@ public class Dipendente {
     public static void setNumeroDipendenti(int numeroDipendenti) {
         Dipendente.numeroDipendenti = numeroDipendenti;
     }
-
-    public void
-
 }
