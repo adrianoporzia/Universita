@@ -1,112 +1,110 @@
-package models;
+    package models;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.HashMap;
+    import java.time.LocalDate;
+    import java.util.HashMap;
 
-public class Sportivo {
-    private String nome;
-    private String cognome;
-    private HashMap<Month, Integer> retiSegnate;
-    private LocalDate dataAssunzione;
-    private int livelloStipendiale;
-    private String numIscrizione;
-    private static int count = 1;
-    private TipoSportivo tipoSportivo;
+    public class Sportivo{
+        private String nome;
+        private String cognome;
+        private HashMap<Integer, Integer> golSportivo;
+        private LocalDate dataDiAssunzione;
+        private static int count = 1;
+        private TipoSportivo tipologiaSportivo;
+        private String numeroIscrizione;
+        private int livelloStipendiale;
 
-    public Sportivo(String nome, String cognome, LocalDate dataAssunzione, int livelloStipendiale, TipoSportivo tipoSportivo) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.retiSegnate = new HashMap<>();
-        this.setDataAssunzione(dataAssunzione);
-        this.setLivelloStipendiale(livelloStipendiale);
-        this.numIscrizione = generateNumIscrizione();  // Usa direttamente generateNumIscrizione()
-        this.tipoSportivo = tipoSportivo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    public void addReti(Month mese, int reti) {
-        if(reti < 0){
-            throw new IllegalArgumentException("Nessun goal da aggiornare");
+        public Sportivo(String nome, String cognome, LocalDate dataDiAssunzione,
+                TipoSportivo tipologiaSportivo, int livelloStipendiale) {
+            this.nome = nome;
+            this.cognome = cognome;
+            this.golSportivo = new HashMap<>();
+            this.dataDiAssunzione = dataDiAssunzione;
+            this.tipologiaSportivo = tipologiaSportivo;
+            this.numeroIscrizione = "TEAM_" + count++;
+            this.setLivelloStipendiale(livelloStipendiale);
         }
-        int currReti = retiSegnate.getOrDefault(mese, 0);
-        this.retiSegnate.put(mese, currReti + reti);
-    }
 
-    public LocalDate getDataAssunzione() {
-        return dataAssunzione;
-    }
-
-    public void setDataAssunzione(LocalDate dataAssunzione) {
-        if(dataAssunzione.getYear() < 2024){
-            throw new IllegalArgumentException("La data non è compatibile");
+        public String getNome() {
+            return nome;
         }
-        this.dataAssunzione = dataAssunzione;
-    }
 
-    public int getLivelloStipendiale() {
-        return livelloStipendiale;
-    }
-
-    public void setLivelloStipendiale(int livelloStipendiale) {
-        if(livelloStipendiale < 1 || livelloStipendiale > 5){
-            throw new IllegalArgumentException("Livello stipendiale incmpatibile.");
+        public void setNome(String nome) {
+            this.nome = nome;
         }
-        this.livelloStipendiale = livelloStipendiale;
-    }
 
-    // Genera il numero di iscrizione
-    private String generateNumIscrizione() {
-        return "TEAM_" + (count++);
-    }
+        public String getCognome() {
+            return cognome;
+        }
 
-    public String getNumIscrizione() {
-        return numIscrizione;
-    }
+        public void setCognome(String cognome) {
+            this.cognome = cognome;
+        }
 
-    public void setNumIscrizione(String numIscrizione) {
-        this.numIscrizione = numIscrizione;
-    }
+        public HashMap<Integer, Integer> getGolSportivo() {
+            return golSportivo;
+        }
 
-    public static int getCount() {
-        return count;
-    }
+        
+        public LocalDate getDataDiAssunzione() {
+            return dataDiAssunzione;
+        }
 
-    public static void setCount(int count) {
-        Sportivo.count = count;
-    }
+        public void setDataDiAssunzione(LocalDate dataDiAssunzione) {
+            this.dataDiAssunzione = dataDiAssunzione;
+        }
 
-    public TipoSportivo getTipoSportivo() {
-        return tipoSportivo;
-    }
+        public TipoSportivo getTipologiaSportivo() {
+            return tipologiaSportivo;
+        }
 
-    public void setTipoSportivo(TipoSportivo tipoSportivo) {
-        this.tipoSportivo = tipoSportivo;
-    }
+        public void setTipologiaSportivo(TipoSportivo tipologiaSportivo) {
+            this.tipologiaSportivo = tipologiaSportivo;
+        }
 
-    @Override
-    public String toString() {
-        return "Sportivo [nome=" + nome + ", cognome=" + cognome + ", retiSegnate=" + retiSegnate + ", dataAssunzione="
-                + dataAssunzione + ", livelloStipendiale=" + livelloStipendiale + ", numIscrizione=" + numIscrizione
-                + ", tipoSportivo=" + tipoSportivo + "]";
-    }
+        public String getNumeroIscrizione() {
+            return numeroIscrizione;
+        }
 
-    public HashMap<Month, Integer> getRetiSegnate() {
-        return retiSegnate;
+        public void setNumeroIscrizione(String numeroIscrizione) {
+            this.numeroIscrizione = numeroIscrizione;
+        }
+
+        public int getLivelloStipendiale() {
+            return livelloStipendiale;
+        }
+
+        public void setLivelloStipendiale(int livelloStipendiale) {
+            if(livelloStipendiale < 1 || livelloStipendiale > 5){
+                throw new IllegalArgumentException("Livello stipendiale non valido");
+            }
+            this.livelloStipendiale = livelloStipendiale;
+        }
+
+        public void setGolPerMese(int mese, int nuoviGol){
+            if(!golSportivo.containsKey(mese)){
+                golSportivo.put(mese, 0);
+            }
+            int golVecchi = golSportivo.get(mese);
+            int golFinali = golVecchi + nuoviGol;
+            golSportivo.put(mese, golFinali); 
+            }
+
+        public int getGolPerMese(int mese){
+            if(!golSportivo.containsKey(mese)){
+                golSportivo.put(mese, 0);
+                return 0;
+            }
+            return golSportivo.get(mese);
+        }
+
+        @Override
+        public String toString() {
+            return "Sportivo [nome=" + nome + ", cognome=" + cognome + "]";
+        }
+
+        
+        
+
+        
+
     }
-}
