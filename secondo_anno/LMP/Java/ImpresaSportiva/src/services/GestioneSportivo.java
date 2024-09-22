@@ -57,7 +57,6 @@ public class GestioneSportivo {
         System.out.println(listaPremiati);
     }
     
-
     public void doppioniData(Month mese, int anno){
         ArrayList<Sportivo> doppioni = new ArrayList<>();
         for(Sportivo sp : listaSportivi){
