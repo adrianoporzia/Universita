@@ -3,28 +3,33 @@ package models;
 import java.time.LocalDate;
 
 public class Dipendente {
-    private String nome;
+
+    public enum Dipartimento{
+        MARKETING, RISORSE_UMANE, SVILUPPO
+    }
+
+    private String  nome;
     private String cognome;
     private LocalDate dataDiNascita;
     private LocalDate dataDiAssunzione;
+
+    private static int count = 1;
     private String matricola;
-    private int count = 0;
-    private Dipartimento dipartimento;
-    private Mansione mansione;
+    private Dipartimento dipartimentoDipendente;
+    private Mansione mansioneDipendente;
     private int livello;
     private Dipendente capoDiretto;
 
     public Dipendente(String nome, String cognome, LocalDate dataDiNascita, LocalDate dataDiAssunzione,
-            Dipartimento dipartimento, Mansione mansione, int livello, Dipendente capoDiretto) {
+            Dipartimento dipartimentoDipendente, Mansione mansioneDipendente, int livello) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataDiNascita = dataDiNascita;
         this.dataDiAssunzione = dataDiAssunzione;
-        this.matricola = "CLT_" + ++count;
-        this.dipartimento = dipartimento;
-        this.mansione = mansione;
+        this.matricola = "CLT_" + count++;
+        this.dipartimentoDipendente = dipartimentoDipendente;
+        this.mansioneDipendente = mansioneDipendente;
         this.livello = livello;
-        this.capoDiretto = capoDiretto;
     }
 
     public String getNome() {
@@ -63,20 +68,24 @@ public class Dipendente {
         return matricola;
     }
 
-    public Dipartimento getDipartimento() {
-        return dipartimento;
+    public void setMatricola(String matricola) {
+        this.matricola = matricola;
     }
 
-    public void setDipartimento(Dipartimento dipartimento) {
-        this.dipartimento = dipartimento;
+    public Dipartimento getDipartimentoDipendente() {
+        return dipartimentoDipendente;
     }
 
-    public Mansione getMansione() {
-        return mansione;
+    public void setDipartimentoDipendente(Dipartimento dipartimentoDipendente) {
+        this.dipartimentoDipendente = dipartimentoDipendente;
     }
 
-    public void setMansione(Mansione mansione) {
-        this.mansione = mansione;
+    public Mansione getMansioneDipendente() {
+        return mansioneDipendente;
+    }
+
+    public void setMansioneDipendente(Mansione mansioneDipendente) {
+        this.mansioneDipendente = mansioneDipendente;
     }
 
     public int getLivello() {
@@ -84,23 +93,11 @@ public class Dipendente {
     }
 
     public void setLivello(int livello) {
-        if(livello < 1 || livello > 8){
-            throw new IllegalArgumentException("Livello non compreso tra 1 e 8");
-        }
         this.livello = livello;
     }
 
     public Dipendente getCapoDiretto() {
         return capoDiretto;
-    }
-
-    public void setCapoDiretto(Dipendente capoDiretto) {
-        this.capoDiretto = capoDiretto;
-    }
-
-    @Override
-    public String toString() {
-        return "Dipendente [nome=" + nome + ", cognome=" + cognome + ", matricola=" + matricola + "]";
     }
 
     

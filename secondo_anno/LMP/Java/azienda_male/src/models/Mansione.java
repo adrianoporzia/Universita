@@ -1,6 +1,6 @@
 package models;
 
 public enum Mansione {
-    TECNICO, FABBRO, ELETTRICISTA, SEGRETARIO
+    FABBRO, TECNICO, MANOVALE, SALDATORE
     
 }
