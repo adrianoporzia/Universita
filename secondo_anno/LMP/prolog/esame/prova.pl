@@ -17,9 +17,9 @@ checkIngredienti(NumPersona, [(Nome,QuantiNeServono) | T], IngredientiConQuantit
     member((Nome, Necessari), IngredientiConQuantità),
     ingrediente(Nome, Disponibili),
     Disponibili >=0,
-    retract(ingrediente(Nome, Disponibili)),
+    retract(ingrediente((Nome, Disponibili))),
     X is Disponibili - Necessari,
-    asserta(ingrediente(Nome, X)),
+    asserta(ingrediente((Nome, X))),
     checkIngredienti(NumPersona, T, IngredientiConQuantità).
 	
 
